@@ -3,20 +3,19 @@ import { AppIcon } from './icon';
 
 const defaultLanguage = 'en';
 const localizedAppName = {
-  en: 'APP_NAME',
+  en: 'Skills',
 };
 
 interface Settings {
   language: 'en';
 }
 
-export const path = '/npwd_app_template';
 export default (settings: Settings) => ({
-  id: 'APP_NAME',
-  path,
+  id: 'skills',
+  path: '/npwd_skills',
   nameLocale: localizedAppName[settings?.language ?? defaultLanguage],
   color: '#fff',
-  backgroundColor: '#333',
+  backgroundColor: '#fc7f03',
   icon: AppIcon,
   app: App,
 });
