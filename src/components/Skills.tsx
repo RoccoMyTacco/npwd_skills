@@ -26,12 +26,26 @@ export const SkillsList: React.FC<SkillListProps> = ({ isDarkMode}) => {
         });
       }
     }, []);
+    const GetColor = (Random: string) => {
+      var hash = 0;
+      for (var i = 0; i < Random.length; i++) {
+          hash = Random.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      var colour = '#';
+      for (var i = 0; i < 3; i++) {
+          var value = (hash >> (i * 8)) & 0xFF;
+          colour += ('00' + value.toString(16)).substr(-2);
+      }
+      return colour;
+    }
     return (
         <List disablePadding sx={{overflow: 'auto'}}>
              {skills.map((skill) => (
                 <ListItem key={skill.skillname} divider>
                     <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',width: '100%'}}>
-                        <ListItemText primaryTypographyProps={{color: isDarkMode ? '#fff' : '#000', fontSize: '17px'}} primary={skill.skillname + ': Level ' + skill.skilllevel} secondary={ <LinearProgress variant="determinate" value={skill.skilllevel} />}/>
+                        <ListItemText primaryTypographyProps={{color: isDarkMode ? '#fff' : '#000', fontSize: '17px'}} primary={skill.skillname + ': Level ' + skill.skilllevel} secondary={ <Box sx={{ width: '100%', color: GetColor(skill.skillname)}}>
+                          <LinearProgress color='inherit' variant='determinate' value={skill.skilllevel} />
+                        </Box>}/>
                     </Box>
                 </ListItem>
             ))}
